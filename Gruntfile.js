@@ -398,11 +398,9 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma:unit'
   ]);
 
   grunt.registerTask('build', [
-    'karma:build',
     'clean',
     'ngtemplates',
     'replace',
