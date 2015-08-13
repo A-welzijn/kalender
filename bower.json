@@ -3,7 +3,6 @@
   "version": "1.0.1",
   "main": [
     "dist/awelzijn-kalender.js",
-    "dist/awelzijn-kalender-service.js",
     "dist/style.css"
   ],
   "ignore": [

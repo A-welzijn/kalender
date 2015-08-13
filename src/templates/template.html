@@ -40,7 +40,7 @@
 			<div a-welzijn-navigate-on-click state="activiteit.detail" params="{id:activiteit.id}" class="activiteit hover clearfix" ng-repeat="activiteit in ctrl.geselecteerdeDag.activiteiten">
 				<div>
 					<input ng-click="$event.stopPropagation();" ng-model="activiteit.checked" type="checkbox">
-					<span ng-click="ctrl.toonActiviteitDetail(activiteit)">{{activiteit.naam}}</span>
+					<span>{{activiteit.naam}}</span>
 				</div>
 				<div>
 					<span class="smaller">{{activiteit.datumVan | date:'EEE dd MMM'}}</span>
