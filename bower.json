@@ -1,9 +1,9 @@
 {
   "name": "awelzijn-kalender",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": [
     "dist/awelzijn-kalender.js",
-    "dist/style.css"
+    "dist/styles.css"
   ],
   "ignore": [
     ".*",
