@@ -204,7 +204,7 @@ Date.prototype.addDays = function (days) {
 		};
 	}]);
 })();
-;angular.module('tink.skeleton').run(['$templateCache', function($templateCache) {
+;angular.module('awelzijn.kalender').run(['$templateCache', function($templateCache) {
   'use strict';
 
   $templateCache.put('templates/template.html',
