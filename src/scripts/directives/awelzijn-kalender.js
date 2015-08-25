@@ -14,7 +14,7 @@
 				ngShow: '='
 			},
 			replace: true,
-			templateUrl: 'templates/template.html',
+			templateUrl: 'templates/kalender.html',
 			bindToController: true,
 			controllerAs: 'ctrl',
 			controller: function ($scope, $element, $attrs) {
