@@ -53,7 +53,7 @@
 
 			return dagenInHuidigeMaand;
 		};
-
+		
 		function _genereerKalender(gekozenMaand, activiteitenLijst) {
 			//datums berekenen tussen begin- en einddatum
 			angular.forEach(activiteitenLijst, function (activiteit) {
@@ -64,6 +64,10 @@
 			var dagenInHuidigeMaand = genereerDagen(geselecteerdeMaand);
 			var kalenderMaand = { weken: [] };
 			var kalenderDagen = [];
+			
+			
+			var vandaag = new Date();
+			vandaag.setHours(0, 0, 0, 0);
 
 			var dagVanDeWeek = 0;
 			angular.forEach(dagenInHuidigeMaand, function (dag) {
@@ -76,7 +80,8 @@
 					}
 				});
 				var eersteOfLaatsteVanMaand = dag.getDate() === 1 || isLaatsteDag(dag);
-				kalenderDagen.push({ datum: dag, eersteOfLaatsteVanMaand: eersteOfLaatsteVanMaand, isBuitenBereik: (dag.getMonth() != geselecteerdeMaand.getMonth()), activiteiten: activiteiten });
+				var isVandaag = dag.getTime() == vandaag.getTime();
+				kalenderDagen.push({ datum: dag, eersteOfLaatsteVanMaand: eersteOfLaatsteVanMaand, vandaag: isVandaag, isBuitenBereik: (dag.getMonth() != geselecteerdeMaand.getMonth()), activiteiten: activiteiten });
 				dagVanDeWeek++;
 				if (dagVanDeWeek % 7 == 0) {
 					kalenderMaand.weken.push(kalenderDagen);
@@ -218,7 +223,7 @@ Date.prototype.addDays = function (days) {
   'use strict';
 
   $templateCache.put('templates/kalender.html',
-    "<div> <div class=kalender> <table> <thead> <tr class=placeholder ng-show=ctrl.loading> <th><center>Activiteiten laden...</center></th> </tr> <tr ng-hide=ctrl.loading> <th>ma<span>andag</span></th> <th>di<span>nsdag</span></th> <th>wo<span>ensdag</span></th> <th>do<span>nderdag</span></th> <th>vr<span>ijdag</span></th> <th>za<span>terdag</span></th> <th>zo<span>ndag</span></th> </tr> </thead> <tbody> <tr class=placeholder ng-show=ctrl.loading> <td><center><i class=\"fa fa-spinner fa-spin\"></i></center></td> </tr> <tr ng-hide=ctrl.loading ng-repeat=\"week in ctrl.kalender.weken\"> <td ng-click=\"ctrl.geselecteerdeDag = dag\" ng-repeat=\"dag in week\" ng-class=\"{'buiten_bereik': (dag.isBuitenBereik || dag.datum.getDay() == 0 || dag.datum.getDay() == 6), 'heeftActiviteiten': dag.activiteiten.length > 0, 'geselecteerdeDag': ctrl.geselecteerdeDag == dag && dag.activiteiten.length > 0}\"> <div class=datum> {{dag.datum | date:'dd'}}\n" +
+    "<div> <div class=kalender> <table> <thead> <tr class=placeholder ng-show=ctrl.loading> <th><center>Activiteiten laden...</center></th> </tr> <tr ng-hide=ctrl.loading> <th>ma<span>andag</span></th> <th>di<span>nsdag</span></th> <th>wo<span>ensdag</span></th> <th>do<span>nderdag</span></th> <th>vr<span>ijdag</span></th> <th>za<span>terdag</span></th> <th>zo<span>ndag</span></th> </tr> </thead> <tbody> <tr class=placeholder ng-show=ctrl.loading> <td><center><i class=\"fa fa-spinner fa-spin\"></i></center></td> </tr> <tr ng-hide=ctrl.loading ng-repeat=\"week in ctrl.kalender.weken\"> <td ng-click=\"ctrl.geselecteerdeDag = dag\" ng-repeat=\"dag in week\" ng-class=\"{'buiten_bereik': (dag.isBuitenBereik || dag.datum.getDay() == 0 || dag.datum.getDay() == 6), 'heeftActiviteiten': dag.activiteiten.length > 0, 'vandaag': dag.isVandaag, 'geselecteerdeDag': ctrl.geselecteerdeDag == dag && dag.activiteiten.length > 0}\"> <div class=datum> {{dag.datum | date:'dd'}}\n" +
     "<span class=large ng-show=dag.eersteOfLaatsteVanMaand> {{dag.datum | date:'MMMM'}}</span>\n" +
     "<span class=small ng-show=dag.eersteOfLaatsteVanMaand> {{dag.datum | date:'MMM'}}</span> </div> <div ng-if=\"dag.activiteiten.length > 0\" class=heeftActiviteiten></div> <div ng-if=dag.activiteiten class=toon-info> <div ng-click=ctrl.onClick(activiteit) ng-repeat=\"activiteit in dag.activiteiten\" class=\"kalenderActiviteit {{activiteit.id}}\"> <div><input ng-click=$event.stopPropagation(); type=checkbox ng-model=\"activiteit.checked\">{{activiteit.naam}}</div> </div> </div> </td> </tr> </tbody> </table> <div class=activiteitenPerDag ng-show=ctrl.geselecteerdeDag> <div ng-click=ctrl.onClick(activiteit) class=\"activiteit hover clearfix\" ng-repeat=\"activiteit in ctrl.geselecteerdeDag.activiteiten\"> <div> <input ng-click=$event.stopPropagation(); ng-model=activiteit.checked type=checkbox>\n" +
     "<span>{{activiteit.naam}}</span> </div> <div> <span class=smaller>{{activiteit.datumVan | date:'EEE dd MMM'}}</span>\n" +

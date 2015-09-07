@@ -53,7 +53,7 @@
 
 			return dagenInHuidigeMaand;
 		};
-
+		
 		function _genereerKalender(gekozenMaand, activiteitenLijst) {
 			//datums berekenen tussen begin- en einddatum
 			angular.forEach(activiteitenLijst, function (activiteit) {
@@ -64,6 +64,10 @@
 			var dagenInHuidigeMaand = genereerDagen(geselecteerdeMaand);
 			var kalenderMaand = { weken: [] };
 			var kalenderDagen = [];
+			
+			
+			var vandaag = new Date();
+			vandaag.setHours(0, 0, 0, 0);
 
 			var dagVanDeWeek = 0;
 			angular.forEach(dagenInHuidigeMaand, function (dag) {
@@ -76,7 +80,8 @@
 					}
 				});
 				var eersteOfLaatsteVanMaand = dag.getDate() === 1 || isLaatsteDag(dag);
-				kalenderDagen.push({ datum: dag, eersteOfLaatsteVanMaand: eersteOfLaatsteVanMaand, isBuitenBereik: (dag.getMonth() != geselecteerdeMaand.getMonth()), activiteiten: activiteiten });
+				var isVandaag = dag.getTime() == vandaag.getTime();
+				kalenderDagen.push({ datum: dag, eersteOfLaatsteVanMaand: eersteOfLaatsteVanMaand, vandaag: isVandaag, isBuitenBereik: (dag.getMonth() != geselecteerdeMaand.getMonth()), activiteiten: activiteiten });
 				dagVanDeWeek++;
 				if (dagVanDeWeek % 7 == 0) {
 					kalenderMaand.weken.push(kalenderDagen);
