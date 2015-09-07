@@ -81,7 +81,7 @@
 				});
 				var eersteOfLaatsteVanMaand = dag.getDate() === 1 || isLaatsteDag(dag);
 				var isVandaag = dag.getTime() == vandaag.getTime();
-				kalenderDagen.push({ datum: dag, eersteOfLaatsteVanMaand: eersteOfLaatsteVanMaand, vandaag: isVandaag, isBuitenBereik: (dag.getMonth() != geselecteerdeMaand.getMonth()), activiteiten: activiteiten });
+				kalenderDagen.push({ datum: dag, eersteOfLaatsteVanMaand: eersteOfLaatsteVanMaand, isVandaag: isVandaag, isBuitenBereik: (dag.getMonth() != geselecteerdeMaand.getMonth()), activiteiten: activiteiten });
 				dagVanDeWeek++;
 				if (dagVanDeWeek % 7 == 0) {
 					kalenderMaand.weken.push(kalenderDagen);
