@@ -70,6 +70,12 @@
   text-align: right;
   margin: 3px 5px 3px 0; }
 
+.kalender .vandaag .datum {
+  font-weight: bold; }
+
+.kalender .vandaag {
+  background-color: #EAF7FF; }
+
 .kalender span.meerActiviteiten {
   color: #00b3dc;
   font-size: .9em;
