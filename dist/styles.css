@@ -13,7 +13,8 @@
   position: relative;
   color: white;
   margin-bottom: 1px;
-  cursor: pointer; }
+  cursor: pointer;
+  white-space: nowrap; }
 
 .kalenderActiviteit.herhaling:before {
   width: 1px;
@@ -42,7 +43,8 @@
   z-index: initial; }
 
 .kalender table {
-  margin-left: 0; }
+  margin-left: 0;
+  table-layout: fixed; }
 
 .kalender th {
   text-align: center;
