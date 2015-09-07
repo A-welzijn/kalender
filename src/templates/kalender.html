@@ -28,7 +28,7 @@
 						</div>
 						<div ng-if="dag.activiteiten.length > 0" class="heeftActiviteiten"></div>
 						<div ng-if="dag.activiteiten" class="toon-info">
-							<div ng-click="ctrl.navigeerNaarDetail(activiteit)" ng-repeat="activiteit in dag.activiteiten" class="kalenderActiviteit {{activiteit.id}}">
+							<div ng-click="ctrl.onClick(activiteit)" ng-repeat="activiteit in dag.activiteiten" class="kalenderActiviteit {{activiteit.id}}">
 								<div><input ng-click="$event.stopPropagation();" type="checkbox" ng-model="activiteit.checked" />{{activiteit.naam}}</div>
 							</div>
 						</div>
@@ -37,7 +37,7 @@
 			</tbody>
 		</table>
 		<div class="activiteitenPerDag" ng-show="ctrl.geselecteerdeDag">
-			<div ng-click="ctrl.navigeerNaarDetail(activiteit)" class="activiteit hover clearfix" ng-repeat="activiteit in ctrl.geselecteerdeDag.activiteiten">
+			<div ng-click="ctrl.onClick(activiteit)" class="activiteit hover clearfix" ng-repeat="activiteit in ctrl.geselecteerdeDag.activiteiten">
 				<div>
 					<input ng-click="$event.stopPropagation();" ng-model="activiteit.checked" type="checkbox">
 					<span>{{activiteit.naam}}</span>
