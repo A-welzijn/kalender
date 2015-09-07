@@ -25,7 +25,7 @@
 				if (!ctrl.activiteitDetailState) { 
 					ctrl.activiteitDetailState = "activiteit.detail"; 
 				}
-				if (!ctrl.onClick) {
+				if (!angular.isDefined($attrs.onClick)) {
 					ctrl.onClick = function (activiteit) {
 						$state.go(ctrl.activiteitDetailState, {id: activiteit.id});
 					}
