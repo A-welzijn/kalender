@@ -1,6 +1,6 @@
 # A-Welzijn Kalender
 
-v1.0.5
+v1.0.6
 
 ### Hoe het eruit ziet
 
