@@ -4,7 +4,7 @@ v1.0.5
 
 ### Hoe het eruit ziet
 
-![Screenshot]()
+![Screenshot](http://s11.postimg.org/asdwiqcwj/Capture.jpg)
 
 ### Hoe het te gebruiken
 
@@ -20,5 +20,5 @@ var app = angular.module('yourApp', [
 ```
 
 ```html
-<a-welzijn-kalender ng-show="kalenderView" activiteiten="data" gekozen-maand="maand"></a-welzijn-kalender>
+<a-welzijn-kalender ng-show="kalenderView" activiteiten="data" gekozen-maand="maand" activiteit-detail-state="activiteit.detail" on-click="clicked(activiteit)"></a-welzijn-kalender>
 ```

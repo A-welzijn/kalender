@@ -17,6 +17,7 @@
     color: white;
     margin-bottom: 1px;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .kalenderActiviteit.herhaling:before {
@@ -54,6 +55,7 @@
 
 .kalender table {
     margin-left: 0;
+    table-layout: fixed;
 }
 
 .kalender th {

@@ -5,13 +5,15 @@
 	} catch (e) {
 		module = angular.module('awelzijn.kalender', []);
 	}
-	module.directive('aWelzijnKalender', ['AwelzijnKalenderService', '$timeout', function (kalenderService, $timeout) {
+	module.directive('aWelzijnKalender', ['AwelzijnKalenderService', '$timeout', '$state', function (kalenderService, $timeout, $state) {
 		return {
 			restrict: 'E',
 			scope: {
 				activiteiten: '=',
 				gekozenMaand: '=',
-				ngShow: '='
+				ngShow: '=',
+				activiteitDetailState: '@',
+				onClick: '&'
 			},
 			replace: true,
 			templateUrl: 'templates/kalender.html',
@@ -20,6 +22,14 @@
 			controller: function ($scope, $element, $attrs) {
 				var ctrl = this;
 				var alligneerBijVolgendeShow = true;
+				if (!ctrl.activiteitDetailState) { 
+					ctrl.activiteitDetailState = "activiteit.detail"; 
+				}
+				if (!ctrl.onClick) {
+					ctrl.onClick = function (activiteit) {
+						$state.go(ctrl.activiteitDetailState, {id: activiteit.id});
+					}
+				}
 
 				$scope.$watch("ctrl.ngShow", function (value) {
 					if (value && ctrl.kalender && alligneerBijVolgendeShow) {
