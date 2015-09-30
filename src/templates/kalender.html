@@ -40,7 +40,10 @@
 			<div ng-click="ctrl.onClick(activiteit)" class="activiteit hover clearfix" ng-repeat="activiteit in ctrl.geselecteerdeDag.activiteiten">
 				<div>
 					<input ng-click="$event.stopPropagation();" ng-model="activiteit.checked" type="checkbox">
-					<span>{{activiteit.naam}}</span>
+
+					{{ctrl.getStringWithDots(activiteit.naam)}}
+                                        <span class="dgpSpanKalender">{{activiteit.datumVan | date:'HH:mm'}}</span>
+
 				</div>
 				<div>
 					<span class="smaller">{{activiteit.datumVan | date:'EEE dd MMM'}}</span>

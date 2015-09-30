@@ -60,6 +60,30 @@
 					}
 				});
 
+				ctrl.getStringWithDots = function(TheString) {
+
+                    if (TheString.length < 16) {
+                        return TheString;
+                        //return padding_right(TheString, ".", 16);
+                    } else {
+                        var NewString = TheString.substring(0, 15);
+                        return NewString + " ... ";
+                    }
+
+                }
+
+                function padding_right(s, c, n) {
+                    //if (!s || !c || s.length >= n) {
+                    //    return s;
+                    //}
+                    var max = (n - s.length) / c.length;
+                    for (var i = 0; i < max; i++) {
+                        s += c;
+                    }
+                    s += "";
+                    return s;
+                }
+				
 				var selecteerVandaag = function () {
 					var vandaag = new Date();
 					vandaag.setHours(0, 0, 0, 0);
