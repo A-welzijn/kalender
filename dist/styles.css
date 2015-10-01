@@ -166,4 +166,7 @@
     border-radius: 100%;
     background-color: grey;
     margin-left: auto;
-    margin-right: auto; } }
+    margin-right: auto; }
+  .dgpSpanKalender {
+    float: right;
+    margin-right: 4px; } }

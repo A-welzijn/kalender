@@ -170,6 +170,30 @@ Date.prototype.addDays = function (days) {
 					}
 				});
 
+				ctrl.getStringWithDots = function(TheString) {
+
+                    if (TheString.length < 16) {
+                        return TheString;
+                        //return padding_right(TheString, ".", 16);
+                    } else {
+                        var NewString = TheString.substring(0, 15);
+                        return NewString + " ... ";
+                    }
+
+                }
+
+                function padding_right(s, c, n) {
+                    //if (!s || !c || s.length >= n) {
+                    //    return s;
+                    //}
+                    var max = (n - s.length) / c.length;
+                    for (var i = 0; i < max; i++) {
+                        s += c;
+                    }
+                    s += "";
+                    return s;
+                }
+				
 				var selecteerVandaag = function () {
 					var vandaag = new Date();
 					vandaag.setHours(0, 0, 0, 0);
@@ -181,10 +205,11 @@ Date.prototype.addDays = function (days) {
 						});
 					})
 				};
-
+				
 				var alligneerKalender = function () {
 					//zorgen dat overlappende activiteiten op dezelfde hoogte staan
 					var activiteitenIds = _.pluck(ctrl.activiteiten, 'id');
+					
 					angular.forEach(activiteitenIds, function (id) {
 						var balkskesVoorActiviteit = $('.kalender td div.' + id);
 						balkskesVoorActiviteit.css("background-color", "#43A047");
@@ -200,17 +225,24 @@ Date.prototype.addDays = function (days) {
 								var huidigBalkske = angular.element(balkskesVoorActiviteit[i]);
 								var vorigBalkske = angular.element(balkskesVoorActiviteit[i - 1]);
 
-								if (huidigBalkske.parent().parent().index() != 0) {
+								var indexHuidigBalkske = huidigBalkske.parent().parent().index();
+								var indexVorigBalkske = vorigBalkske.parent().parent().index();
+								
+								if (indexHuidigBalkske != 0) {
 									huidigBalkske.addClass("herhaling");
 								}
-
-								var dummyBalkske = '<div class="kalenderActiviteit" style="visibility:collapse;">dummy</div>';
-								while (huidigBalkske[0].offsetTop < vorigBalkske[0].offsetTop) {
-									angular.element(huidigBalkske).parent().prepend(dummyBalkske);
+								
+								// niet aligneren over week heen
+								if (indexVorigBalkske != 6) {
+									var dummyBalkske = '<div class="kalenderActiviteit" style="visibility:collapse;">dummy</div>';
+									while (huidigBalkske[0].offsetTop < vorigBalkske[0].offsetTop) {
+										huidigBalkske.parent().prepend(dummyBalkske);
+									}
+									while (vorigBalkske[0].offsetTop < huidigBalkske[0].offsetTop) {
+										vorigBalkske.parent().prepend(dummyBalkske);
+									}								
 								}
-								while (vorigBalkske[0].offsetTop < huidigBalkske[0].offsetTop) {
-									angular.element(balkskesVoorActiviteit[i - 1]).parent().prepend(dummyBalkske);
-								}
+								
 							}
 						}
 					});
@@ -226,7 +258,7 @@ Date.prototype.addDays = function (days) {
     "<div> <div class=kalender> <table> <thead> <tr class=placeholder ng-show=ctrl.loading> <th><center>Activiteiten laden...</center></th> </tr> <tr ng-hide=ctrl.loading> <th>ma<span>andag</span></th> <th>di<span>nsdag</span></th> <th>wo<span>ensdag</span></th> <th>do<span>nderdag</span></th> <th>vr<span>ijdag</span></th> <th>za<span>terdag</span></th> <th>zo<span>ndag</span></th> </tr> </thead> <tbody> <tr class=placeholder ng-show=ctrl.loading> <td><center><i class=\"fa fa-spinner fa-spin\"></i></center></td> </tr> <tr ng-hide=ctrl.loading ng-repeat=\"week in ctrl.kalender.weken\"> <td ng-click=\"ctrl.geselecteerdeDag = dag\" ng-repeat=\"dag in week\" ng-class=\"{'buiten_bereik': (dag.isBuitenBereik || dag.datum.getDay() == 0 || dag.datum.getDay() == 6), 'heeftActiviteiten': dag.activiteiten.length > 0, 'vandaag': dag.isVandaag, 'geselecteerdeDag': ctrl.geselecteerdeDag == dag && dag.activiteiten.length > 0}\"> <div class=datum> {{dag.datum | date:'dd'}}\n" +
     "<span class=large ng-show=dag.eersteOfLaatsteVanMaand> {{dag.datum | date:'MMMM'}}</span>\n" +
     "<span class=small ng-show=dag.eersteOfLaatsteVanMaand> {{dag.datum | date:'MMM'}}</span> </div> <div ng-if=\"dag.activiteiten.length > 0\" class=heeftActiviteiten></div> <div ng-if=dag.activiteiten class=toon-info> <div ng-click=ctrl.onClick(activiteit) ng-repeat=\"activiteit in dag.activiteiten\" class=\"kalenderActiviteit {{activiteit.id}}\"> <div><input ng-click=$event.stopPropagation(); type=checkbox ng-model=\"activiteit.checked\">{{activiteit.naam}}</div> </div> </div> </td> </tr> </tbody> </table> <div class=activiteitenPerDag ng-show=ctrl.geselecteerdeDag> <div ng-click=ctrl.onClick(activiteit) class=\"activiteit hover clearfix\" ng-repeat=\"activiteit in ctrl.geselecteerdeDag.activiteiten\"> <div> <input ng-click=$event.stopPropagation(); ng-model=activiteit.checked type=checkbox>\n" +
-    "<span>{{activiteit.naam}}</span> </div> <div> <span class=smaller>{{activiteit.datumVan | date:'EEE dd MMM'}}</span>\n" +
+    "{{ctrl.getStringWithDots(activiteit.naam)}}[{htmlmin-lb}]<span class=dgpSpanKalender>{{activiteit.datumVan | date:'HH:mm'}}</span> </div> <div> <span class=smaller>{{activiteit.datumVan | date:'EEE dd MMM'}}</span>\n" +
     "<span>{{activiteit.datumVan | date:'HH:mm'}}</span> <div ng-show=\"activiteit.datums.length > 1\"> <span>tot</span>\n" +
     "<span class=smaller>{{activiteit.datumTot | date:'EEE dd MMM'}}</span>\n" +
     "<span>{{activiteit.datumTot | date:'HH:mm'}}</span> </div> </div> </div> </div> </div> </div>"

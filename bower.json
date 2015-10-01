@@ -1,6 +1,6 @@
 {
   "name": "awelzijn-kalender",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "main": [
     "dist/awelzijn-kalender.js",
     "dist/styles.css"

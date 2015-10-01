@@ -95,10 +95,11 @@
 						});
 					})
 				};
-
+				
 				var alligneerKalender = function () {
 					//zorgen dat overlappende activiteiten op dezelfde hoogte staan
 					var activiteitenIds = _.pluck(ctrl.activiteiten, 'id');
+					
 					angular.forEach(activiteitenIds, function (id) {
 						var balkskesVoorActiviteit = $('.kalender td div.' + id);
 						balkskesVoorActiviteit.css("background-color", "#43A047");
@@ -114,17 +115,24 @@
 								var huidigBalkske = angular.element(balkskesVoorActiviteit[i]);
 								var vorigBalkske = angular.element(balkskesVoorActiviteit[i - 1]);
 
-								if (huidigBalkske.parent().parent().index() != 0) {
+								var indexHuidigBalkske = huidigBalkske.parent().parent().index();
+								var indexVorigBalkske = vorigBalkske.parent().parent().index();
+								
+								if (indexHuidigBalkske != 0) {
 									huidigBalkske.addClass("herhaling");
 								}
-
-								var dummyBalkske = '<div class="kalenderActiviteit" style="visibility:collapse;">dummy</div>';
-								while (huidigBalkske[0].offsetTop < vorigBalkske[0].offsetTop) {
-									angular.element(huidigBalkske).parent().prepend(dummyBalkske);
+								
+								// niet aligneren over week heen
+								if (indexVorigBalkske != 6) {
+									var dummyBalkske = '<div class="kalenderActiviteit" style="visibility:collapse;">dummy</div>';
+									while (huidigBalkske[0].offsetTop < vorigBalkske[0].offsetTop) {
+										huidigBalkske.parent().prepend(dummyBalkske);
+									}
+									while (vorigBalkske[0].offsetTop < huidigBalkske[0].offsetTop) {
+										vorigBalkske.parent().prepend(dummyBalkske);
+									}								
 								}
-								while (vorigBalkske[0].offsetTop < huidigBalkske[0].offsetTop) {
-									angular.element(balkskesVoorActiviteit[i - 1]).parent().prepend(dummyBalkske);
-								}
+								
 							}
 						}
 					});
