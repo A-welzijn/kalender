@@ -13,7 +13,8 @@
 				gekozenMaand: '=',
 				ngShow: '=',
 				activiteitDetailState: '@',
-				onClick: '='
+				onClick: '=',
+				toonUur: '='
 			},
 			replace: true,
 			templateUrl: 'templates/kalender.html',

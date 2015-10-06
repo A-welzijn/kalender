@@ -38,13 +38,19 @@
 		</table>
 		<div class="activiteitenPerDag" ng-show="ctrl.geselecteerdeDag">
 			<div ng-click="ctrl.onClick(activiteit)" class="activiteit hover clearfix" ng-repeat="activiteit in ctrl.geselecteerdeDag.activiteiten">
-				<div>
-					<input ng-click="$event.stopPropagation();" ng-model="activiteit.checked" type="checkbox">
+				
+				<div ng-show="ctrl.toonUur">                                    
+                     <input ng-click="$event.stopPropagation();" type="checkbox" ng-model="activiteit.checked" ng-trim="false" />
+                     {{ctrl.getStringWithDots(activiteit.naam)}}
+                     <span class="dgpSpanKalender">{{activiteit.datumVan | date:'HH:mm'}}</span>
+                </div>
+                <div ng-show="!ctrl.toonUur">
+                    <input ng-click="$event.stopPropagation();" type="checkbox" ng-model="activiteit.checked" ng-trim="false" />
+                    {{activiteit.naam}}                                    
+                </div>
 
-					{{ctrl.getStringWithDots(activiteit.naam)}}
-                                        <span class="dgpSpanKalender">{{activiteit.datumVan | date:'HH:mm'}}</span>
 
-				</div>
+
 				<div>
 					<span class="smaller">{{activiteit.datumVan | date:'EEE dd MMM'}}</span>
 					<span>{{activiteit.datumVan | date:'HH:mm'}}</span>
