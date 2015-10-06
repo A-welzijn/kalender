@@ -29,7 +29,18 @@
 						<div ng-if="dag.activiteiten.length > 0" class="heeftActiviteiten"></div>
 						<div ng-if="dag.activiteiten" class="toon-info">
 							<div ng-click="ctrl.onClick(activiteit)" ng-repeat="activiteit in dag.activiteiten" class="kalenderActiviteit {{activiteit.id}}">
-								<div><input ng-click="$event.stopPropagation();" type="checkbox" ng-model="activiteit.checked" />{{activiteit.naam}}</div>
+								
+								
+								<div ng-show="ctrl.toonUur">                                    
+                     				<input ng-click="$event.stopPropagation();" type="checkbox" ng-model="activiteit.checked" ng-trim="false" />
+                    			   	       {{ctrl.getStringWithDots(activiteit.naam)}}
+                     				<span class="dgpSpanKalender">{{activiteit.datumVan | date:'HH:mm'}}</span>
+                				</div>
+								<div ng-show="!ctrl.toonUur">
+									<input ng-click="$event.stopPropagation();" type="checkbox" ng-model="activiteit.checked" />{{activiteit.naam}}
+								</div>
+
+
 							</div>
 						</div>
 					</td>
@@ -39,12 +50,8 @@
 		<div class="activiteitenPerDag" ng-show="ctrl.geselecteerdeDag">
 			<div ng-click="ctrl.onClick(activiteit)" class="activiteit hover clearfix" ng-repeat="activiteit in ctrl.geselecteerdeDag.activiteiten">
 				
-				<div ng-show="ctrl.toonUur">                                    
-                     <input ng-click="$event.stopPropagation();" type="checkbox" ng-model="activiteit.checked" ng-trim="false" />
-                     {{ctrl.getStringWithDots(activiteit.naam)}}
-                     <span class="dgpSpanKalender">{{activiteit.datumVan | date:'HH:mm'}}</span>
-                </div>
-                <div ng-show="!ctrl.toonUur">
+				
+                <div>
                     <input ng-click="$event.stopPropagation();" type="checkbox" ng-model="activiteit.checked" ng-trim="false" />
                     {{activiteit.naam}}                                    
                 </div>
