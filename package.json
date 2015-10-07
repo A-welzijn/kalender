@@ -1,7 +1,7 @@
 {
   "name": "awelzijn-kalender",
   "description": "Awelzijn kalender directive",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "repository": {
     "type": "git",
     "url": "git@github.com:A-welzijn/kalender.git"
