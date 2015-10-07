@@ -85,7 +85,7 @@ module.exports = function (grunt) {
             removeScriptTypeAttributes: true,
             removeStyleLinkTypeAttributes: true,
             conservativeCollapse: true,
-            preserveLineBreaks: true
+            preserveLineBreaks: false
           }
         },
         cwd: 'src',
