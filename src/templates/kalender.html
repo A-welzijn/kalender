@@ -34,7 +34,7 @@
 								<div ng-show="ctrl.toonUur">                                    
                      				<input ng-click="$event.stopPropagation();" type="checkbox" ng-model="activiteit.checked" ng-trim="false" />
                     			   	       {{ctrl.getStringWithDots(activiteit.naam)}}
-                     				<span class="dgpSpanKalender">{{activiteit.datumVan | date:'HH:mm'}}</span>
+                     				<span class="dgpSpanKalender pull-right">{{activiteit.datumVan | date:'HH:mm'}}</span>
                 				</div>
 								<div ng-show="!ctrl.toonUur">
 									<input ng-click="$event.stopPropagation();" type="checkbox" ng-model="activiteit.checked" />{{activiteit.naam}}
