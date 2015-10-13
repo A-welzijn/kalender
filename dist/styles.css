@@ -105,6 +105,10 @@
 .kalender .datum .small {
   display: none; }
 
+.dgpSpanKalender {
+  float: right;
+  margin-right: 4px; }
+
 @media (max-width: 1400px) {
   .kalenderActiviteit span {
     display: none; }
@@ -166,7 +170,4 @@
     border-radius: 100%;
     background-color: grey;
     margin-left: auto;
-    margin-right: auto; }
-  .dgpSpanKalender {
-    float: right;
-    margin-right: 4px; } }
+    margin-right: auto; } }
